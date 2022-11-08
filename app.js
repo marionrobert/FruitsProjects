@@ -29,7 +29,7 @@ async function main() {
   })
 
   //save the document
-  fruit.save()
+  // fruit.save()
 
   //**CHALLENGE: Set up a people database with one document and two fields**//
   //create a SCHEMA
@@ -48,14 +48,7 @@ async function main() {
   });
 
   //Save it
-  person.save();
-
-  // ----- 3rd cmd (to check whether the data is in mongosh) -----
-  // (1)mongosh
-  // (2)show dbs
-  // (3)use <databseName>
-  // (4)show collections
-  // (5)db.<collectionName>.find()
+  // person.save();
 
   // inser many documents at once
   const kiwi = new Fruit ({
@@ -76,11 +69,25 @@ async function main() {
     review: "good friend"
   })
 
-  Fruit.insertMany([kiwi, mango, pear], function(err){
-    if (err) {
+  // commented to not add those fruits each time the app is launched
+  // Fruit.insertMany([kiwi, mango, pear], function(err){
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log("Successfully saved all the fruits to fruitsDB");
+  //   }
+  // });
+
+  Fruit.find(function(err, fruits){
+    if (err){
       console.log(err);
     } else {
-      console.log("Successfully saved all the fruits to fruitsDB");
-    }
+      mongoose.connection.close();
+      fruits.forEach(function(fruit){
+        console.log(fruit["name"]);
+      });
+    };
   });
+
+
 }
