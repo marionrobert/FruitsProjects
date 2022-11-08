@@ -78,7 +78,7 @@ async function main() {
 
   Fruit.insertMany([kiwi, mango, pear], function(err){
     if (err) {
-      consoloe.log(err);
+      console.log(err);
     } else {
       console.log("Successfully saved all the fruits to fruitsDB");
     }
