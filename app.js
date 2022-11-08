@@ -13,8 +13,15 @@ async function main() {
 
   //create a SCHEMA that sets out the fields each document will have and their datatypes
   const fruitSchema = new mongoose.Schema ({
-  	name: String,
-  	rating: Number,
+  	name: {
+      type: String,
+      required: [true, "Please check your data entry, name is missing!"]
+    },
+  	rating: {
+      type: Number,
+      min: 1,
+      max: 10
+    },
   	review: String
   })
 
@@ -23,13 +30,13 @@ async function main() {
 
   //create a DOCUMENT
   const fruit = new Fruit ({
-  	name: "Apple",
-  	rating: 7,
-  	review: "Great!"
+    // name: "Pineapple",
+  	rating: 2,
+  	review: "Disgusting"
   })
 
   //save the document
-  // fruit.save()
+  fruit.save()
 
   //**CHALLENGE: Set up a people database with one document and two fields**//
   //create a SCHEMA
@@ -51,23 +58,23 @@ async function main() {
   // person.save();
 
   // inser many documents at once
-  const kiwi = new Fruit ({
-    name: "Kiwi",
-    rating: 7,
-    review: "bof ça donne des aphtes"
-  })
-
-  const mango = new Fruit ({
-    name: "Mango",
-    rating: 10,
-    review: "Tastes like heaven"
-  })
-
-  const pear = new Fruit ({
-    name: "Pear",
-    rating: 7,
-    review: "good friend"
-  })
+  // const kiwi = new Fruit ({
+  //   name: "Kiwi",
+  //   rating: 7,
+  //   review: "bof ça donne des aphtes"
+  // })
+  //
+  // const mango = new Fruit ({
+  //   name: "Mango",
+  //   rating: 10,
+  //   review: "Tastes like heaven"
+  // })
+  //
+  // const pear = new Fruit ({
+  //   name: "Pear",
+  //   rating: 7,
+  //   review: "good friend"
+  // })
 
   // commented to not add those fruits each time the app is launched
   // Fruit.insertMany([kiwi, mango, pear], function(err){
