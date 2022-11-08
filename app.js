@@ -28,15 +28,15 @@ async function main() {
   //create a MODEL
   const Fruit = new mongoose.model ("Fruit", fruitSchema)
 
-  //create a DOCUMENT
-  const fruit = new Fruit ({
-    // name: "Pineapple",
-  	rating: 2,
-  	review: "Disgusting"
-  })
+  // //create a DOCUMENT
+  // const fruit = new Fruit ({
+  //   name: "Pineapple",
+  // 	rating: 2,
+  // 	review: "Disgusting"
+  // })
 
   //save the document
-  fruit.save()
+  // fruit.save()
 
   //**CHALLENGE: Set up a people database with one document and two fields**//
   //create a SCHEMA
@@ -85,6 +85,8 @@ async function main() {
   //   }
   // });
 
+
+  // read data with mongoose
   Fruit.find(function(err, fruits){
     if (err){
       console.log(err);
@@ -96,5 +98,61 @@ async function main() {
     };
   });
 
+  // update data with mongoose
+  Fruit.updateOne({rating: 111}, {raating: 99}, function(err, result){
+    if (err){
+      console.log(err);
+    } else {
+      console.log("update ok");
+      console.log(result);
+    }
+  })
+
+  // woeking, see https://mongoosejs.com/docs/async-await.html#:~:text=Async%2Fawait%20lets%20us%20write,scenario%20when%20working%20with%20Mongoose.
+  // Fruit.findOne({rating: 56}, function(err, doc) {
+  //   if(err) {
+  //     console.log(err);
+  //     handleError(err);
+  //   }
+  //
+  //   doc.rating = 1;
+  //
+  //   doc.save(function(err, updatedDoc) {
+  //     if(err) {
+  //       // handleError(err);
+  //       console.log(err);
+  //     }
+  //
+  //     // Final logic is 2 callbacks deep
+  //     console.log(updatedDoc);
+  //     console.log("update ok")
+  //   });
+  // })
+
+
+
+
+
+  // // delete data with mongoose
+  // Fruit.deleteOne(
+  //   {name: "Pineapple"},
+  //   function(err, result){
+  //     if (err) {
+  //       console.log(err);
+  //       handleError(err);
+  //     } else {
+  //       console.log(result);
+  //       console.log("Successfully deleted!");
+  //     }
+  //   }
+  // );
+
+  Person.deleteMany({name: "John"}, function(err, result){
+    if (err){
+      console.log(err);
+    } else {
+      console.log("Successfully deleted all the document");
+    }
+  })
 
 }
