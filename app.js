@@ -29,33 +29,50 @@ async function main() {
   const Fruit = new mongoose.model ("Fruit", fruitSchema)
 
   // //create a DOCUMENT
-  // const fruit = new Fruit ({
-  //   name: "Pineapple",
-  // 	rating: 2,
-  // 	review: "Disgusting"
-  // })
+  const lemon = new Fruit ({
+    name: "Lemon",
+  	rating: 2,
+  	review: "Disgusting"
+  })
 
-  //save the document
-  // fruit.save()
+  // const orange = new Fruit ({
+  //   name: "Orange",
+  //   rating: 2,
+  //   review: "Disgusting"
+  // })
+  //
+  // // save the document
+  // pineapple.save()
+  // orange.save()
+  lemon.save()
 
   //**CHALLENGE: Set up a people database with one document and two fields**//
   //create a SCHEMA
   const personSchema = new mongoose.Schema({
     name: String,
     age: Number,
+    favoriteFruit: fruitSchema
   });
 
   //create a MODEL
   const Person = mongoose.model('Person', personSchema);
 
   //create a DOCUMENT
-  const person = new Person({
-    name: "John",
-    age: 37
-  });
+  // const person = new Person({
+  //   name: "John",
+  //   age: 37
+  // });
+
+  // const amy = new Person({
+  //   name: "Amy",
+  //   age: 12,
+  //   favoriteFruit: pineapple
+  // });
+
 
   //Save it
   // person.save();
+  // amy.save();
 
   // inser many documents at once
   // const kiwi = new Fruit ({
@@ -99,16 +116,15 @@ async function main() {
   });
 
   // update data with mongoose
-  Fruit.updateOne({rating: 111}, {raating: 99}, function(err, result){
+  Person.updateOne({name: "John"}, {favoriteFruit: lemon}, function(err, result){
     if (err){
       console.log(err);
     } else {
       console.log("update ok");
-      console.log(result);
     }
   })
 
-  // woeking, see https://mongoosejs.com/docs/async-await.html#:~:text=Async%2Fawait%20lets%20us%20write,scenario%20when%20working%20with%20Mongoose.
+  // working, see https://mongoosejs.com/docs/async-await.html#:~:text=Async%2Fawait%20lets%20us%20write,scenario%20when%20working%20with%20Mongoose.
   // Fruit.findOne({rating: 56}, function(err, doc) {
   //   if(err) {
   //     console.log(err);
@@ -147,12 +163,13 @@ async function main() {
   //   }
   // );
 
-  Person.deleteMany({name: "John"}, function(err, result){
-    if (err){
-      console.log(err);
-    } else {
-      console.log("Successfully deleted all the document");
-    }
-  })
+// // delete many objects
+//   Person.deleteMany({name: "John"}, function(err, result){
+//     if (err){
+//       console.log(err);
+//     } else {
+//       console.log("Successfully deleted all the document");
+//     }
+//   })
 
 }
